@@ -1,0 +1,29 @@
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  overflow: hidden;
+}
+
+/* paneles tipo “puerta” */
+.loader-panel {
+  width: 50%;
+  height: 100%;
+  background: #000;
+}
+
+/* centro con gif */
+.loader-center {
+  position: absolute;
+  inset: 0;
+  background: url("../assets/gif/descarga.gif") center center / cover no-repeat;
+}
+
+/* contenido oculto al inicio */
+#app {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+
