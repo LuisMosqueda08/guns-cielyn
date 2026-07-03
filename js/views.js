@@ -1,12 +1,34 @@
-const namespace = "luis-portafolio";
-const key = "home";
+const supabaseClient = window.supabase.createClient(
+    "https://aijsyzaqxzxeqqedioze.supabase.co",
+    "sb_publishable_gC_eyhetBV8ccM4DD_1-mQ_D5C7AzPL"
+);
 
-fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("visitCount").textContent = data.value;
-    })
-    .catch(error => {
+async function updateCounter() {
+
+    const { data, error } = await supabaseClient
+        .from("visits")
+        .select("total")
+        .eq("id", 1)
+        .single();
+
+    if (error) {
         console.error(error);
-        document.getElementById("visitCount").textContent = "--";
-    });
+        return;
+    }
+
+    const newTotal = data.total + 1;
+
+    const { error: updateError } = await supabaseClient
+        .from("visits")
+        .update({ total: newTotal })
+        .eq("id", 1);
+
+    if (updateError) {
+        console.error(updateError);
+        return;
+    }
+
+    document.getElementById("visitCount").textContent = newTotal;
+}
+
+updateCounter();
