@@ -1,34 +1,27 @@
-const supabaseClient = window.supabase.createClient(
-    "https://aijsyzaqxzxeqqedioze.supabase.co",
-    "sb_publishable_gC_eyhetBV8ccM4DD_1-mQ_D5C7AzPL"
-);
+const SUPABASE_URL = "https://aijsyzaqxzxeqqedioze.supabase.co";
+const SUPABASE_PUBLIC_KEY = "sb_publishable_gC_eyhetBV8ccM4DD_1-mQ_D5C7AzPL";
 
-async function updateCounter() {
+async function loadCounter() {
 
-    const { data, error } = await supabaseClient
-        .from("visits")
-        .select("total")
-        .eq("id", 1)
-        .single();
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/visits?id=eq.1&select=total`, {
+            headers: { apikey: SUPABASE_PUBLIC_KEY },
+            method: "GET",
+            mode: "cors",
+            credentials: "omit",
+            referrerPolicy: "no-referrer"
+        });
 
-    if (error) {
-        console.error(error);
-        return;
+        if (!response.ok) throw new Error(`Counter request failed (${response.status})`);
+
+        const [data] = await response.json();
+        const counter = document.getElementById("visitCount");
+        if (counter && Number.isSafeInteger(data?.total) && data.total >= 0) {
+            counter.textContent = String(data.total);
+        }
+    } catch (error) {
+        console.error("No se pudo cargar el contador", error);
     }
-
-    const newTotal = data.total + 1;
-
-    const { error: updateError } = await supabaseClient
-        .from("visits")
-        .update({ total: newTotal })
-        .eq("id", 1);
-
-    if (updateError) {
-        console.error(updateError);
-        return;
-    }
-
-    document.getElementById("visitCount").textContent = newTotal;
 }
 
-updateCounter();
+loadCounter();

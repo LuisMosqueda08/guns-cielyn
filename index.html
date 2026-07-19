@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>cielyn</title>
 
@@ -50,10 +51,10 @@
         <div id="username"><h1>cielyn</h1></div>
 
         <div class="social-media">
-            <a href="https://www.instagram.com/luis_mossqueda/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://steamcommunity.com/profiles/76561199634829378/" target="_blank"><i class="fa-brands fa-steam"></i></a>
-            <a href="https://discord.com/users/1505739247787839491" target="_blank"><i class="fa-brands fa-discord"></i></a>
-            <a href="https://www.twitch.tv/micielyn" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+            <a href="https://www.instagram.com/luis_mossqueda/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://steamcommunity.com/profiles/76561199634829378/" target="_blank" rel="noopener noreferrer" aria-label="Steam"><i class="fa-brands fa-steam" aria-hidden="true"></i></a>
+            <a href="https://discord.com/users/1505739247787839491" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+            <a href="https://www.twitch.tv/micielyn" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><i class="fa-brands fa-twitch" aria-hidden="true"></i></a>
         </div>
         </div>
     </main>
@@ -65,9 +66,6 @@
 
     <!-- GSAP -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
- 
-
     <!-- JS -->
     <script src="js/config.js"></script>
     <script src="js/loader.js"></script>
@@ -77,14 +75,13 @@
     <script src="js/cursor.js"></script>
     <script src="js/main.js"></script>
 
-</body>
-
-<audio id="bg-music" loop>
+<audio id="bg-music" loop preload="none">
   <source src="assets/audio/Playboi Carti - Slay3r (Official Audio).mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-control">
-  <i class="fa-solid fa-play"></i>
+<div class="music-control" role="button" tabindex="0" aria-label="Reproducir o pausar música">
+  <i class="fa-solid fa-play" aria-hidden="true"></i>
 </div>
 
+</body>
 </html>

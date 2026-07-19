@@ -43,6 +43,13 @@ window.addEventListener("keydown", startMusic);
     }
   });
 
+  btn.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      btn.click();
+    }
+  });
+
   // 🔥 desbloqueo por interacción real (OBLIGATORIO en Chrome)
   const unlock = () => {
     music.play()
